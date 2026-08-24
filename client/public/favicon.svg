@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="RyzzQuizz">
+  <defs>
+    <linearGradient id="r" x1="14" y1="12" x2="46" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b39dff"/>
+      <stop offset="1" stop-color="#6244e0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="15" fill="#0d0e1f"/>
+
+  <!-- R: stem + bowl + kicked-out leg, drawn as thick round strokes so it
+       stays chunky and legible when the tab renders it at 16px. -->
+  <g fill="none" stroke="url(#r)" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 48V17h11.5a8.75 8.75 0 0 1 0 17.5H21"/>
+    <path d="M31 34.5 44 48"/>
+  </g>
+
+  <!-- Check mark sitting in the bowl's counter -->
+  <path d="m24.5 28.5 4.5 4.5 9.5-10" fill="none" stroke="#fff" stroke-width="5.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Confetti burst -->
+  <g stroke-width="4.5" stroke-linecap="round">
+    <path d="M49 17.5 52.5 13" stroke="#2ec4b6"/>
+    <path d="M53.5 22.5 58.5 20" stroke="#e84855"/>
+    <path d="M44.5 12.5 46 7" stroke="#f9a03f"/>
+  </g>
+</svg>

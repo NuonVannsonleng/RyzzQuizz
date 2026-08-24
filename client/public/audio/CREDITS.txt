@@ -1,0 +1,14 @@
+Background music — all tracks CC0 (public domain), sourced from opengameart.org.
+Attribution is not required under CC0 but is included here as courtesy.
+
+menu.mp3
+  "01 - buffy - old fashion - intro" by buffy.cz
+  https://opengameart.org/content/intro-music-for-game
+
+game.mp3
+  "High" by Alex McCulloch
+  https://opengameart.org/content/pop-music
+
+victory.mp3
+  "Victory" by celestialghost8
+  https://opengameart.org/content/victory
