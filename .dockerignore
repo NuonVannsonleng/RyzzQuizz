@@ -1,0 +1,17 @@
+# node_modules is reinstalled inside the image by `npm ci` — copying the host
+# copy in would both slow the build and risk shipping platform-specific builds.
+node_modules
+**/node_modules
+
+# Rebuilt during the image build.
+client/dist
+
+# Never let secrets into an image layer.
+.env
+.env.local
+**/.env
+
+.git
+.gitignore
+*.log
+.DS_Store
