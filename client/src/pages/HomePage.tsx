@@ -8,6 +8,7 @@ import { useWallet } from '../lib/wallet.js';
 import { useAuth } from '../lib/authContext.js';
 import { playMusic } from '../lib/music.js';
 import { Navbar } from '../components/Navbar.js';
+import { Banner } from '../components/Banner.js';
 import { Button } from '../components/Button.js';
 import { CodeInput } from '../components/CodeInput.js';
 import { CoinBadge } from '../components/CoinBadge.js';
@@ -110,14 +111,7 @@ export function HomePage() {
           <PartyBackground />
 
           <div className="hero__content">
-            <m.h1
-              className="brand"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Ryzz<span>Quizz</span>
-            </m.h1>
+            <Banner />
             <m.p
               className="tagline"
               initial={{ opacity: 0, y: 10 }}

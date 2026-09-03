@@ -16,6 +16,7 @@ import { useToast } from '../components/ToastProvider.js';
 import { getWallet, earnCoins } from '../lib/wallet.js';
 import { playMusic } from '../lib/music.js';
 import { Navbar } from '../components/Navbar.js';
+import { Banner } from '../components/Banner.js';
 import { Button } from '../components/Button.js';
 import { CoinBadge } from '../components/CoinBadge.js';
 import { ConnectionStatus } from '../components/ConnectionStatus.js';
@@ -256,6 +257,7 @@ export function PlayPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
             >
+              <Banner size="md" />
               <m.h2
                 animate={{ scale: [1, 1.04, 1] }}
                 transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}

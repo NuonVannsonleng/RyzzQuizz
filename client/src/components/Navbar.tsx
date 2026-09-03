@@ -25,10 +25,7 @@ export function Navbar({ right }: { right?: ReactNode }) {
           onClick={() => navigate('/')}
           aria-label="RyzzQuizz — home"
         >
-          <BrandMark />
-          <span className="navbar__brandtext">
-            Ryzz<span className="navbar__brandaccent">Quizz</span>
-          </span>
+          <BrandMark size={34} />
         </button>
         <div className="navbar__right">
           {right}

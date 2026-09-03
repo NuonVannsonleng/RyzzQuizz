@@ -16,6 +16,7 @@ import { useToast } from '../components/ToastProvider.js';
 import { sfxStart } from '../lib/sfx.js';
 import { playMusic } from '../lib/music.js';
 import { Navbar } from '../components/Navbar.js';
+import { Banner } from '../components/Banner.js';
 import { Button } from '../components/Button.js';
 import { ConfirmDialog } from '../components/ConfirmDialog.js';
 import { ConnectionStatus } from '../components/ConnectionStatus.js';
@@ -233,6 +234,7 @@ export function HostPage() {
           {error && <p className="error" role="alert">{error}</p>}
           <section className="lobbybig">
             <PartyBackground />
+            <Banner size="md" />
             <div className="lobbybig__pin">
               <span className="lobbybig__pin-label">{t('host.joinAt')}</span>
               <div className="lobbybig__pin-code">{snapshot.code}</div>

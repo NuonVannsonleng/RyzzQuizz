@@ -120,13 +120,15 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px 2px;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--text);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  line-height: 0;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
-.navbar__brand span { color: var(--accent-2); }
+.navbar__brand:hover { background: var(--surface-2); transform: scale(1.06); }
+.navbar__brand:active { transform: scale(0.96); }
 .navbar__right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
 .navbar__settingsbtn {
   width: 38px;
@@ -240,15 +242,43 @@ body {
 
 /* ===== Brand / hero ===== */
 
-.brand {
-  font-size: clamp(2.5rem, 9vw, 4rem);
-  margin: 0;
-  letter-spacing: -0.03em;
-}
-.brand span { color: var(--accent-2); }
-.brand--sm { font-size: 1.6rem; }
+.brandmark--tile { filter: drop-shadow(0 6px 18px rgba(98, 68, 224, 0.4)); }
 
 .tagline { color: var(--muted); margin: 0 0 8px; }
+
+/* Icon + wordmark lockup — home hero, host lobby, player lobby. */
+.banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.banner__glow {
+  position: absolute;
+  top: -30%;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(50px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -1;
+}
+.banner__wordmark {
+  font-size: clamp(2.5rem, 9vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.banner--md .banner__wordmark { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+.banner__wordmark-accent {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.banner__tagline { color: var(--muted); font-size: 0.95rem; margin-top: -4px; }
 
 .hero {
   position: relative;
