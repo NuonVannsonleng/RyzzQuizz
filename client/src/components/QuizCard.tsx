@@ -2,6 +2,7 @@ import { m } from 'motion/react';
 import type { QuizSummary } from '@ryzzquizz/shared';
 import { useI18n } from '../i18n/index.js';
 import { SubjectIcon } from './SubjectIcon.js';
+import { CoverScene } from './CoverScene.js';
 
 interface Props {
   quiz: QuizSummary;
@@ -32,7 +33,10 @@ export function QuizCard({ quiz, index, picking, disabled, onPick }: Props) {
         transition={{ type: 'spring', stiffness: 400, damping: 28 }}
       >
         <span className={`quizcard__cover quizcard__cover--${quiz.category}`}>
-          <SubjectIcon slug={quiz.subject ?? quiz.category} size={40} className="quizcard__emoji" />
+          <CoverScene slug={quiz.subject ?? quiz.category} />
+          <span className="quizcard__iconwrap">
+            <SubjectIcon slug={quiz.subject ?? quiz.category} size={30} className="quizcard__emoji" />
+          </span>
           <span className="quizcard__badges">
             {quiz.grade && <span className="quizcard__grade">{quiz.grade}</span>}
             <span className={`quizcard__difficulty quizcard__difficulty--${quiz.difficulty}`}>
