@@ -48,8 +48,8 @@ export function AnswerGrid({ options, picked, disabled, onPick, correctIndex }: 
             // whileHover/whileTap inherit `transition` unless given their own — without
             // this override, hovering tile i also inherited its 0.06*i entrance delay,
             // so the hover scale visibly lagged more the further right/down the tile was.
-            whileHover={picked === null && !disabled ? { scale: 1.02, transition: spring.pop } : undefined}
-            whileTap={picked === null && !disabled ? { scale: 0.97, transition: spring.pop } : undefined}
+            whileHover={picked === null && !disabled ? { scale: 1.02, y: -2, transition: spring.pop } : undefined}
+            whileTap={picked === null && !disabled ? { scale: 0.92, transition: spring.pop } : undefined}
           >
             <OptionShape index={i} />
             <span className="option__text">{opt}</span>

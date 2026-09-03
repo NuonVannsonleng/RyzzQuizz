@@ -9,6 +9,7 @@ import { useAuth } from '../lib/authContext.js';
 import { playMusic } from '../lib/music.js';
 import { Navbar } from '../components/Navbar.js';
 import { Button } from '../components/Button.js';
+import { CodeInput } from '../components/CodeInput.js';
 import { CoinBadge } from '../components/CoinBadge.js';
 import { AvatarView } from '../components/AvatarView.js';
 import { AvatarPicker } from '../components/AvatarPicker.js';
@@ -157,18 +158,8 @@ export function HomePage() {
               transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               <label htmlFor="code">{t('home.roomCode')}</label>
-              <input
-                id="code"
-                className="input input--code"
-                value={code}
-                onChange={(e) => setCode(e.target.value.toUpperCase())}
-                maxLength={ROOM_CODE_LENGTH}
-                placeholder="ABC123"
-                autoComplete="off"
-                autoCapitalize="characters"
-                required
-              />
-              <p className="muted" style={{ marginTop: -8, fontSize: '0.78rem' }}>
+              <CodeInput id="code" value={code} onChange={setCode} length={ROOM_CODE_LENGTH} />
+              <p className="muted" style={{ marginTop: -4, fontSize: '0.78rem' }}>
                 {t('home.roomCodeHint')}
               </p>
 
