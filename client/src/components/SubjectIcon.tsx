@@ -109,6 +109,13 @@ const ICONS: Record<string, IconBody> = {
       stroke="none"
     />
   ),
+  // "Country Guess" — distinct from the geography *subject*'s folded-map icon.
+  'country-guess': () => (
+    <>
+      <path d="M12 22s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </>
+  ),
   entertainment: () => (
     <>
       <path d="M3 9.5h18l-1.2 10.5H4.2L3 9.5Z" />

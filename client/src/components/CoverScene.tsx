@@ -70,6 +70,10 @@ const PROPS: Record<string, Prop[]> = {
     { text: '✦', x: 46, y: 62, size: 24, opacity: 0.52 },
     { text: '✦', x: 82, y: 84, size: 14, opacity: 0.36 },
   ],
+  'country-guess': [
+    { d: 'M0 16 6 4l4 6 3-4 7 14Z', x: 44, y: 48, size: 1, opacity: 0.5 },
+    { r: 5, x: 82, y: 82, size: 1, opacity: 0.32 },
+  ],
   entertainment: [
     { d: 'M0 20V8a2 2 0 0 1 2-2h2l3-5h9l-3 5h4l3-5h5l-3 5h2a2 2 0 0 1 2 2v12Z', x: 40, y: 44, size: 0.9, opacity: 0.5 },
     { d: 'M6 2 0 22h12L6 2Z', x: 80, y: 82, size: 0.65, opacity: 0.38, rotate: -6 },

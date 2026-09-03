@@ -1,7 +1,8 @@
 import { m } from 'motion/react';
 import type { QuizSummary } from '@ryzzquizz/shared';
 import { useI18n } from '../i18n/index.js';
-import { SubjectIcon } from './SubjectIcon.js';
+import { coverKey } from '../lib/coverKey.js';
+import { CoverPhoto } from './CoverPhoto.js';
 
 interface Props {
   quizzes: QuizSummary[];
@@ -35,7 +36,7 @@ export function FeaturedList({ quizzes, onPick }: Props) {
           >
             <span className="featrow__rank" aria-hidden="true">{i + 1}</span>
             <span className={`featrow__cover featrow__cover--${quiz.category}`}>
-              <SubjectIcon slug={quiz.subject ?? quiz.category} size={26} />
+              <CoverPhoto coverKey={coverKey(quiz)} className="featrow__photo" />
             </span>
             <span className="featrow__body">
               <span className="featrow__title">{quiz.title}</span>

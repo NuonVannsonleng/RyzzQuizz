@@ -980,14 +980,35 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   align-items: center;
   justify-content: space-between;
   padding: 12px 14px;
+  background: var(--cardhue, var(--accent));
+}
+/* The tint sits ON TOP of the photo (or the illustrated fallback) — category
+   colour identity plus enough contrast that badges/icon stay legible over a
+   busy image. */
+.quizcard__cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   background:
-    radial-gradient(120% 130% at 12% 0%, rgba(255, 255, 255, 0.28) 0%, transparent 60%),
-    linear-gradient(150deg, var(--cardhue, var(--accent)) 0%, rgba(10, 11, 26, 0.42) 135%);
+    radial-gradient(120% 130% at 12% 0%, rgba(255, 255, 255, 0.22) 0%, transparent 60%),
+    linear-gradient(150deg, color-mix(in srgb, var(--cardhue, var(--accent)) 55%, transparent) 0%, rgba(10, 11, 26, 0.62) 135%);
+  pointer-events: none;
+}
+.quizcard__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 /* Composed scene, not a flat tint — background shapes from the same family
-   as the answer tiles, bleeding off the top/right edge. */
+   as the answer tiles, bleeding off the top/right edge. Only shows up if the
+   photo for this subject/category 404s. */
 .coverscene { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.quizcard__iconwrap, .quizcard__badges { position: relative; z-index: 1; }
+.quizcard__iconwrap, .quizcard__badges { position: relative; z-index: 2; }
 .quizcard__cover--education { --cardhue: #7c6cf0; }
 .quizcard__cover--geography { --cardhue: #2ec4b6; }
 .quizcard__cover--people { --cardhue: #ff6fa5; }
@@ -1711,6 +1732,8 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   font-variant-numeric: tabular-nums;
 }
 .featrow__cover {
+  position: relative;
+  overflow: hidden;
   flex: none;
   width: 56px;
   height: 56px;
@@ -1718,9 +1741,27 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   place-items: center;
   font-size: 1.7rem;
   border-radius: var(--radius-sm);
-  background: linear-gradient(150deg, var(--collhue, var(--accent)) 0%, rgba(0, 0, 0, 0.35) 130%);
+  background: var(--collhue, var(--accent));
   box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.35);
+  color: #fff;
 }
+.featrow__cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(150deg, color-mix(in srgb, var(--collhue, var(--accent)) 45%, transparent) 0%, rgba(0, 0, 0, 0.55) 130%);
+  pointer-events: none;
+}
+.featrow__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.featrow__cover .coverscene { z-index: 2; }
 .featrow__cover--education { --collhue: #7c6cf0; }
 .featrow__cover--geography { --collhue: #2ec4b6; }
 .featrow__cover--people { --collhue: #ff6fa5; }

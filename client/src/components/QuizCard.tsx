@@ -1,8 +1,9 @@
 import { m } from 'motion/react';
 import type { QuizSummary } from '@ryzzquizz/shared';
 import { useI18n } from '../i18n/index.js';
+import { coverKey } from '../lib/coverKey.js';
 import { SubjectIcon } from './SubjectIcon.js';
-import { CoverScene } from './CoverScene.js';
+import { CoverPhoto } from './CoverPhoto.js';
 
 interface Props {
   quiz: QuizSummary;
@@ -17,6 +18,7 @@ const DIFFICULTY_DOT = { easy: '🟢', medium: '🟡', hard: '🔴' } as const;
 /** One tile in the library grid — staggers in on mount, lifts on hover, shows a busy state while its room is being created. */
 export function QuizCard({ quiz, index, picking, disabled, onPick }: Props) {
   const { t } = useI18n();
+  const key = coverKey(quiz);
 
   return (
     <m.li
@@ -33,9 +35,9 @@ export function QuizCard({ quiz, index, picking, disabled, onPick }: Props) {
         transition={{ type: 'spring', stiffness: 400, damping: 28 }}
       >
         <span className={`quizcard__cover quizcard__cover--${quiz.category}`}>
-          <CoverScene slug={quiz.subject ?? quiz.category} />
+          <CoverPhoto coverKey={key} className="quizcard__photo" />
           <span className="quizcard__iconwrap">
-            <SubjectIcon slug={quiz.subject ?? quiz.category} size={30} className="quizcard__emoji" />
+            <SubjectIcon slug={key} size={30} className="quizcard__emoji" />
           </span>
           <span className="quizcard__badges">
             {quiz.grade && <span className="quizcard__grade">{quiz.grade}</span>}
