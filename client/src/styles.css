@@ -868,11 +868,13 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   color: var(--muted);
   font-family: inherit;
   cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease,
+    transform 0.1s ease;
   white-space: nowrap;
 }
 .pill-btn small { font-size: 0.7rem; opacity: 0.75; font-weight: 500; }
-.pill-btn:hover { border-color: var(--accent); color: var(--text); }
+.pill-btn:hover { border-color: var(--accent); color: var(--text); box-shadow: var(--shadow-sm); }
+.pill-btn:active { transform: scale(0.96); }
 .pill-btn.is-active {
   background: linear-gradient(135deg, var(--accent), #5b4bd6);
   border-color: transparent;
@@ -904,14 +906,21 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   flex-direction: column;
   text-align: left;
   background: var(--surface);
-  border: 1px solid var(--border-strong);
+  border: 2px solid var(--border-strong);
   border-radius: var(--radius-lg);
   color: var(--text);
   font-family: inherit;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
+.quizcard--education { --cardhue: #7c6cf0; }
+.quizcard--geography { --cardhue: #2ec4b6; }
+.quizcard--people { --cardhue: #ff6fa5; }
+.quizcard--entertainment { --cardhue: #f9a03f; }
+.quizcard--sports { --cardhue: #3a86ff; }
+.quizcard--culture { --cardhue: #e84855; }
+.quizcard--general { --cardhue: #a78bfa; }
 .quizcard::before {
   content: "";
   position: absolute;
@@ -921,25 +930,28 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   transition: opacity 0.2s ease;
   pointer-events: none;
 }
-.quizcard:hover:not(:disabled) { border-color: var(--accent); box-shadow: var(--shadow-md); }
+.quizcard:hover:not(:disabled) {
+  border-color: var(--cardhue, var(--accent));
+  box-shadow: 0 16px 34px -10px color-mix(in srgb, var(--cardhue, var(--accent)) 55%, transparent), var(--shadow-md);
+}
 .quizcard:hover:not(:disabled)::before { opacity: 1; }
 .quizcard:disabled { opacity: 0.55; cursor: wait; }
-.quizcard.is-picking { border-color: var(--accent); }
+.quizcard.is-picking { border-color: var(--cardhue, var(--accent)); }
 
 /* Cover band — stands in for a cover image (the catalog has emoji, not photos),
    tinted per category so a grid of cards reads by colour at a glance. */
 .quizcard__cover {
   position: relative;
   z-index: 1;
-  height: 92px;
+  height: 96px;
   flex: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 14px;
   background:
-    radial-gradient(120% 130% at 12% 0%, rgba(255, 255, 255, 0.22) 0%, transparent 60%),
-    linear-gradient(150deg, var(--cardhue, var(--accent)) 0%, rgba(10, 11, 26, 0.55) 135%);
+    radial-gradient(120% 130% at 12% 0%, rgba(255, 255, 255, 0.28) 0%, transparent 60%),
+    linear-gradient(150deg, var(--cardhue, var(--accent)) 0%, rgba(10, 11, 26, 0.42) 135%);
 }
 .quizcard__cover--education { --cardhue: #7c6cf0; }
 .quizcard__cover--geography { --cardhue: #2ec4b6; }
@@ -1356,12 +1368,23 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
 /* ===== Party background ===== */
 
 .party-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-.party-bg__bunting { position: absolute; top: 0; left: 0; width: 100%; height: 52px; opacity: 0.9; }
-.party-bg__flag--o0 { fill: var(--o0); }
-.party-bg__flag--o1 { fill: var(--o1); }
-.party-bg__flag--o2 { fill: var(--o2); }
-.party-bg__flag--o3 { fill: var(--o3); }
-.party-bg__flag--accent { fill: var(--accent); }
+/* One soft, slowly drifting band of colour instead of a hard row of shapes. */
+.party-bg__aurora {
+  position: absolute;
+  top: -160px;
+  left: 50%;
+  width: min(1000px, 150%);
+  height: 300px;
+  background: linear-gradient(90deg, var(--o0), var(--accent) 30%, var(--o1) 55%, var(--o3) 78%, var(--o2));
+  filter: blur(80px);
+  opacity: 0.3;
+  border-radius: 50%;
+  animation: auroraDrift 16s ease-in-out infinite;
+}
+@keyframes auroraDrift {
+  0%, 100% { transform: translateX(-50%) translateY(0) scaleX(1); }
+  50% { transform: translateX(-46%) translateY(14px) scaleX(1.08); }
+}
 .party-bg__glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.28; }
 .party-bg__glow--1 { width: 420px; height: 420px; background: var(--accent); top: 8%; left: -10%; animation: drift1 22s ease-in-out infinite; }
 .party-bg__glow--2 { width: 360px; height: 360px; background: #2ec4b6; bottom: -12%; right: -8%; animation: drift2 26s ease-in-out infinite; }
@@ -1547,13 +1570,13 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   scrollbar-width: thin;
 }
 .collcard {
-  flex: 0 0 168px;
+  flex: 0 0 176px;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   padding: 18px 16px;
-  border: 1px solid var(--border-strong);
+  border: 2px solid var(--border-strong);
   border-radius: var(--radius-md);
   background: linear-gradient(160deg, var(--surface-2) 0%, var(--surface) 100%);
   color: var(--text);
@@ -1562,15 +1585,18 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 /* A colour wash per shelf so the row scans by hue, not just by emoji. */
 .collcard::before {
   content: '';
   position: absolute;
   inset: 0;
-  opacity: 0.16;
-  background: radial-gradient(120% 90% at 0% 0%, var(--collhue, var(--accent)) 0%, transparent 62%);
+  opacity: 0.3;
+  background: radial-gradient(120% 90% at 0% 0%, var(--collhue, var(--accent)) 0%, transparent 65%);
   pointer-events: none;
+  transition: opacity 0.18s ease;
 }
 .collcard--education { --collhue: #7c6cf0; }
 .collcard--geography { --collhue: #2ec4b6; }
@@ -1579,8 +1605,24 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
 .collcard--sports { --collhue: #3a86ff; }
 .collcard--culture { --collhue: #e84855; }
 .collcard--general { --collhue: #a78bfa; }
-.collcard:hover { border-color: var(--accent); }
-.collcard__icon { font-size: 1.7rem; line-height: 1; position: relative; }
+.collcard:hover {
+  border-color: var(--collhue, var(--accent));
+  box-shadow: 0 10px 26px -8px color-mix(in srgb, var(--collhue, var(--accent)) 60%, transparent);
+}
+.collcard:hover::before { opacity: 0.44; }
+.collcard__icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  position: relative;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(150deg, var(--collhue, var(--accent)) 0%, rgba(0, 0, 0, 0.3) 130%);
+  box-shadow: 0 4px 10px -2px color-mix(in srgb, var(--collhue, var(--accent)) 55%, transparent);
+}
 .collcard__name { font-weight: 700; font-size: 0.96rem; position: relative; }
 .collcard__count { font-size: 0.76rem; color: var(--muted); position: relative; }
 
@@ -1597,35 +1639,42 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border: 1px solid transparent;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border-strong);
   border-radius: var(--radius-md);
-  background: transparent;
+  background: var(--surface);
   color: var(--text);
   font-family: inherit;
   text-align: left;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.featrow:hover { background: var(--surface); border-color: var(--border-strong); }
+.featrow:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 .featrow__rank {
   flex: none;
-  width: 26px;
-  font-size: 1.25rem;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 1.02rem;
   font-weight: 800;
-  color: var(--muted);
-  text-align: center;
+  color: var(--text);
+  background: var(--surface-3);
+  border-radius: 50%;
   font-variant-numeric: tabular-nums;
 }
 .featrow__cover {
   flex: none;
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
   display: grid;
   place-items: center;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   border-radius: var(--radius-sm);
   background: linear-gradient(150deg, var(--collhue, var(--accent)) 0%, rgba(0, 0, 0, 0.35) 130%);
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.35);
 }
 .featrow__cover--education { --collhue: #7c6cf0; }
 .featrow__cover--geography { --collhue: #2ec4b6; }

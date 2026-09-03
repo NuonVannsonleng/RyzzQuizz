@@ -23,7 +23,7 @@ export function QuizCard({ quiz, index, picking, disabled, onPick }: Props) {
       transition={{ duration: 0.28, delay: Math.min(index, 10) * 0.035, ease: [0.16, 1, 0.3, 1] }}
     >
       <m.button
-        className={`quizcard ${picking ? 'is-picking' : ''}`}
+        className={`quizcard quizcard--${quiz.category} ${picking ? 'is-picking' : ''}`}
         disabled={disabled}
         onClick={() => onPick(quiz.id)}
         whileHover={disabled ? undefined : { y: -4 }}
