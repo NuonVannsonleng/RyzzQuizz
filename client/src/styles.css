@@ -973,6 +973,7 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
 .quizcard__cover {
   position: relative;
   z-index: 1;
+  overflow: hidden;
   height: 96px;
   flex: none;
   display: flex;
@@ -983,6 +984,20 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
     radial-gradient(120% 130% at 12% 0%, rgba(255, 255, 255, 0.28) 0%, transparent 60%),
     linear-gradient(150deg, var(--cardhue, var(--accent)) 0%, rgba(10, 11, 26, 0.42) 135%);
 }
+/* A banner texture, not just a flat tint — faint diagonal stripes behind the icon. */
+.quizcard__cover::after {
+  content: '';
+  position: absolute;
+  inset: -20% -10%;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.09) 0 10px,
+    transparent 10px 26px
+  );
+  pointer-events: none;
+}
+.quizcard__emoji, .quizcard__badges { position: relative; z-index: 1; }
 .quizcard__cover--education { --cardhue: #7c6cf0; }
 .quizcard__cover--geography { --cardhue: #2ec4b6; }
 .quizcard__cover--people { --cardhue: #ff6fa5; }

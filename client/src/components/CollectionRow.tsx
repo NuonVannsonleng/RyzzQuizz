@@ -1,6 +1,7 @@
 import { m } from 'motion/react';
 import { CATEGORIES } from '@ryzzquizz/shared';
 import { useI18n } from '../i18n/index.js';
+import { SubjectIcon } from './SubjectIcon.js';
 
 interface Props {
   counts: Record<string, number> | null;
@@ -25,7 +26,9 @@ export function CollectionRow({ counts, onPick }: Props) {
           whileHover={{ y: -5, transition: { type: 'spring', stiffness: 400, damping: 26 } }}
           whileTap={{ scale: 0.97, transition: { type: 'spring', stiffness: 400, damping: 26 } }}
         >
-          <span className="collcard__icon" aria-hidden="true">{cat.emoji}</span>
+          <span className="collcard__icon">
+            <SubjectIcon slug={cat.slug} size={22} />
+          </span>
           <span className="collcard__name">{lang === 'km' ? cat.kh : cat.en}</span>
           <span className="collcard__count">
             {counts?.[cat.slug] ?? 0} {t('home.collectionQuizzes')}

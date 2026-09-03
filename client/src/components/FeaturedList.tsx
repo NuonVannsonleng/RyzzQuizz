@@ -1,6 +1,7 @@
 import { m } from 'motion/react';
 import type { QuizSummary } from '@ryzzquizz/shared';
 import { useI18n } from '../i18n/index.js';
+import { SubjectIcon } from './SubjectIcon.js';
 
 interface Props {
   quizzes: QuizSummary[];
@@ -33,8 +34,8 @@ export function FeaturedList({ quizzes, onPick }: Props) {
             whileTap={{ scale: 0.985, transition: { type: 'spring', stiffness: 400, damping: 26 } }}
           >
             <span className="featrow__rank" aria-hidden="true">{i + 1}</span>
-            <span className={`featrow__cover featrow__cover--${quiz.category}`} aria-hidden="true">
-              {quiz.emoji}
+            <span className={`featrow__cover featrow__cover--${quiz.category}`}>
+              <SubjectIcon slug={quiz.subject ?? quiz.category} size={26} />
             </span>
             <span className="featrow__body">
               <span className="featrow__title">{quiz.title}</span>
