@@ -1,36 +1,44 @@
 :root {
-  /* Original tokens — kept exactly as-is so Timer/Verdict/Podium/ResultsBars/
-     Leaderboard (which already reference these) don't need to change. */
-  --bg: #0d0e1f;
-  --surface: #191b34;
-  --surface-2: #22243f;
-  --text: #f5f6fc;
-  --muted: #9aa0c0;
-  --accent: #7c6cf0;
-  --good: #22c58f;
-  --bad: #f0596a;
+  /* Light theme — RyzzQuizz Unified Web Design System. White/lavender page
+     and cards, dark-purple gradient reserved for accent panels (hero,
+     lobby/leaderboard) rather than the whole app. */
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-2: #f1f1f8;
+  --text: #171329;
+  --muted: #625d78;
+  --accent: #7c5cff;
+  --good: #22c55e;
+  --bad: #ef4444;
   --o0: #e84855;
   --o1: #3a86ff;
   --o2: #f9a03f;
   --o3: #2ec4b6;
   --radius: 14px;
 
-  /* New tokens for the design-system pass. */
-  --surface-3: #2b2e4d;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.14);
+  --surface-3: #e7e7f3;
+  --border: rgba(23, 19, 41, 0.08);
+  --border-strong: rgba(23, 19, 41, 0.14);
   --accent-2: #a78bfa;
-  --accent-dim: rgba(124, 108, 240, 0.16);
-  --warn: #f9a03f;
+  --accent-dim: rgba(124, 92, 255, 0.12);
+  --warn: #f59e0b;
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
   --radius-full: 999px;
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 2px 10px rgba(23, 19, 41, 0.06);
+  --shadow-md: 0 10px 28px rgba(23, 19, 41, 0.08);
+  --shadow-lg: 0 24px 64px rgba(23, 19, 41, 0.14);
   --header-h: 68px;
   --container-max: 1280px;
+
+  /* Dark-purple accent panel — hero, auth brand panel, host lobby/leaderboard.
+     These stay dark-on-purple regardless of the light page around them. */
+  --panel-bg: #18113d;
+  --panel-surface: #21164d;
+  --panel-text: #ffffff;
+  --panel-muted: rgba(255, 255, 255, 0.72);
+  --panel-border: rgba(255, 255, 255, 0.14);
 }
 
 * { box-sizing: border-box; }
@@ -46,8 +54,8 @@ body {
   width: 100%;
   min-height: 100vh;
   background:
-    radial-gradient(900px 500px at 85% -10%, rgba(124, 108, 240, 0.16) 0%, transparent 60%),
-    radial-gradient(1200px 600px at 15% -10%, #262a52 0%, var(--bg) 55%);
+    radial-gradient(1000px 480px at 88% -8%, rgba(124, 92, 255, 0.08) 0%, transparent 60%),
+    var(--bg);
   color: var(--text);
   font-family: "Kantumruy Pro", system-ui, -apple-system, "Segoe UI", "Khmer UI",
     "Noto Sans Khmer", "Khmer OS Battambang", "Khmer OS", sans-serif;
@@ -101,7 +109,7 @@ body {
   top: 0;
   z-index: 40;
   width: 100%;
-  background: rgba(13, 14, 31, 0.72);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -280,17 +288,46 @@ body {
 }
 .banner__tagline { color: var(--muted); font-size: 0.95rem; margin-top: -4px; }
 
+/* Accent panel — dark purple, contained, sits on the light page rather than
+   being the page. Redefines the core tokens so every ordinary component
+   inside (Button, .pill, .statchip...) reads correctly against the dark
+   background with zero per-component overrides. */
 .hero {
+  --surface: var(--panel-surface);
+  --surface-2: rgba(255, 255, 255, 0.1);
+  --surface-3: rgba(255, 255, 255, 0.16);
+  --text: var(--panel-text);
+  --muted: var(--panel-muted);
+  --border: var(--panel-border);
+  --border-strong: rgba(255, 255, 255, 0.24);
+  --accent-dim: rgba(167, 139, 250, 0.28);
+
   position: relative;
   overflow: hidden;
-  min-height: calc(100vh - var(--header-h));
+  background: linear-gradient(155deg, var(--panel-bg) 0%, #2a1a5e 100%);
+  border-radius: var(--radius-lg);
+  margin: 20px auto 0;
+  max-width: var(--container-max);
+  width: calc(100% - 40px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 22px;
-  padding: 48px 20px 64px;
+  padding: 56px 20px 64px;
   text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+/* The join card is the one primary action — it escapes the dark panel
+   tokens above and floats as a proper white card, the way a hero's signup
+   card would on a real product site. */
+.hero .joincard {
+  --surface: #ffffff;
+  --surface-2: #f1f1f8;
+  --text: #171329;
+  --muted: #625d78;
+  --border-strong: rgba(23, 19, 41, 0.14);
+  --accent-dim: rgba(124, 92, 255, 0.12);
 }
 .hero__bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .hero__blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.32; }
@@ -1385,7 +1422,7 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
   transition: transform 0.12s ease, border-color 0.15s ease;
 }
 .swatch:hover { transform: translateY(-2px); }
-.swatch.is-active { border-color: #fff; box-shadow: 0 0 0 3px var(--accent-dim); }
+.swatch.is-active { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
 
 .pill-btn-row { display: flex; gap: 8px; }
 
@@ -1464,17 +1501,30 @@ label { font-size: 0.85rem; color: var(--muted); margin-bottom: -8px; font-weigh
 
 /* ===== Host lobby — big screen ===== */
 
+/* Same dark accent-panel treatment as .hero — this hosts the room PIN and
+   the live leaderboard/podium, which the reference keeps on a dark purple
+   backdrop rather than a plain white card. */
 .lobbybig {
+  --surface: var(--panel-surface);
+  --surface-2: rgba(255, 255, 255, 0.1);
+  --surface-3: rgba(255, 255, 255, 0.16);
+  --text: var(--panel-text);
+  --muted: var(--panel-muted);
+  --border: var(--panel-border);
+  --border-strong: rgba(255, 255, 255, 0.24);
+  --accent-dim: rgba(167, 139, 250, 0.28);
+
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-strong);
-  background: var(--surface);
+  border: none;
+  background: linear-gradient(155deg, var(--panel-bg) 0%, #2a1a5e 100%);
   padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 22px;
   min-height: calc(100vh - var(--header-h) - 56px);
+  box-shadow: var(--shadow-lg);
 }
 .lobbybig__pin {
   position: relative;
